@@ -1,0 +1,27 @@
+# 缓存和临时文件
+.cache/
+.stm32cubemx/
+.stmcube/
+.stmcufinder/
+*.tmp
+*.bak
+*~
+
+# VS Code
+.vscode/extensions/
+.vscode/*.log
+
+# 编译产物
+Debug/
+Release/
+MDK-ARM/
+*.o
+*.d
+*.hex
+*.bin
+*.elf
+*.map
+*.lst
+*.axf
+*.uvguix.*
+*.uvoptx
