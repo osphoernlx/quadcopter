@@ -14,7 +14,7 @@
 # 编译产物
 Debug/
 Release/
-MDK-ARM/
+
 *.o
 *.d
 *.hex
