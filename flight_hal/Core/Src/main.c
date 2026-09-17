@@ -27,6 +27,7 @@
 /* USER CODE BEGIN Includes */
 #include "com_debug.h"
 #include "APP_freeRTOS_Task.h"
+#include "Int_SI24R1.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -97,12 +98,13 @@ int main(void)
   MX_TIM4_Init();
   MX_SPI1_Init();
   /* USER CODE BEGIN 2 */
-  //实现�?初的日志输出打印
+  //实现�?初的日志输出打印
   //HAL_UART_Transmit(&huart2, (uint8_t *)"Hello World!\r\n", 14, 0xFFFF);
 
   //使用C语言标准的日志输出功能PRINTF
   debug_printf("Hello World!\r\n");
 
+  Int_SI24R1_Init();
   //启用freeRTOS操作系统=>后续的代码都不再执行
   App_FreeRTOS_Task_start();
   /* USER CODE END 2 */
