@@ -17,7 +17,7 @@
                 "e:\\stm32_project resources\\flight_hal\\MDK-ARM\\freertos\\portable",
                 "e:\\stm32_project resources\\flight_hal\\MDK-ARM\\Application",
                 "e:\\stm32_project resources\\flight_hal\\MDK-ARM\\interface",
-                "E:\\KEIL MDK\\ARM\\ARMCC\\include",
+                "E:/KEIL MDK/ARM/ARMCC/ARMCC/include",
                 "e:\\stm32_project resources\\flight_hal\\MDK-ARM",
                 "e:\\stm32_project resources\\flight_hal\\Core\\Src",
                 "e:\\stm32_project resources\\flight_hal\\Drivers\\STM32F1xx_HAL_Driver\\Src"

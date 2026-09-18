@@ -66,7 +66,7 @@ void com_task(void *args);
 #define COM_TASK_PRIORITY 2
 TaskHandle_t Com_Task_Handler;
 //任务周期
-#define COM_TASK_PERIOD 100
+#define COM_TASK_PERIOD 6
 
 
 /**
@@ -207,32 +207,18 @@ void led_task(void *args)
 uint8_t com_data[TX_PLOAD_WIDTH]={0};
 void com_task(void *args)
 {
+  //获取当前的基准时间
     TickType_t xLastWakeTime = xTaskGetTickCount();
 
     while (1)
     {
+        //接收数据到缓冲区
         uint8_t res = Int_SI24R1_RxPacket(com_data);
-
-        if (res == 0)
+        if(res==0)
         {
-            printf("RX OK\r\n");
-
-            Int_SI24R1_TX_Mode();
-
-            uint8_t tx_res = Int_SI24R1_TxPacket(com_data);
-
-            if (tx_res == 0)
-            {
-                printf("TX OK\r\n");
-            }
-            else
-            {
-                printf("TX FAIL\r\n");
-            }
-
-            Int_SI24R1_RX_Mode();
+          debug_printf("接收数据成功:%s\n", com_data);
         }
-
+        //6ms执行一次 接收数据的时间间隔应该等于发送数据的时间间隔
         vTaskDelayUntil(&xLastWakeTime, COM_TASK_PERIOD);
     }
 }
