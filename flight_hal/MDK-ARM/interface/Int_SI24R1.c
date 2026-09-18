@@ -194,7 +194,6 @@ uint8_t Int_SI24R1_TxPacket(uint8_t *txbuf)
 	return 1;			//发送失败																		
 }
 
-
 /**
  * @brief SI24R1的初始化检测
  * 
