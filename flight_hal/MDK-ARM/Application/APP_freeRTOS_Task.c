@@ -214,12 +214,14 @@ void com_task(void *args)
     //接收数据到缓冲区
     uint8_t res=Int_SI24R1_RxPacket(com_data);
     //判断是否接收到数据
-    if(res==0)
+    if(res==0)//收到数据
     {
       printf("%s\n",com_data);
+      Int_SI24R1_TX_Mode();
+      //发送数据
+      Int_SI24R1_TxPacket(com_data);
+      Int_SI24R1_RX_Mode();
     }
-    //发送数据
-    Int_SI24R1_TxPacket(com_data);
     //每6ms执行一次 接收数据的时间间隔应该等于发送数据的时间间隔
     vTaskDelayUntil(&xLastWakeTime, COM_TASK_PERIOD);
   }

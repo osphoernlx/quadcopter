@@ -1,3 +1,4 @@
-Load "flight_hal\\flight_hal.axf" 
-Erase Done.Programming Done.Verify OK.Application running ...
-Flash Load finished at 19:46:01
+*** Using Compiler 'V5.06 update 7 (build 960)', folder: 'E:\KEIL MDK\ARM\ARMCC\ARMCC\Bin'
+Build target 'flight_hal'
+"flight_hal\flight_hal.axf" - 0 Error(s), 0 Warning(s).
+Build Time Elapsed:  00:00:01
