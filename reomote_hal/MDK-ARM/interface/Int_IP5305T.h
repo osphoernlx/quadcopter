@@ -6,7 +6,7 @@
 #include "task.h"
 
 /**
- * @brief  鍚姩IP5305T鐢垫簮 閬垮厤鑷姩鍏虫満
+ * @brief  启动IP5305T电源 避免自动关机
  * 
  * 
  */

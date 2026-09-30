@@ -10,22 +10,22 @@ typedef struct
 }LED_Struct;
 
 /**
- * @brief  æ‰“å¼€LEDç¯
- * @param  led: LEDç»“æ„ä½“æŒ‡é’ˆ
+ * @brief  ´ò¿ªLEDµÆ
+ * @param  led: LED½á¹¹ÌåÖ¸Õë
  * @retval None
  */
 void Int_LED_turn_on(LED_Struct *led);
 
 /**
- * @brief  å…³é—­LEDç¯
- * @param  led: LEDç»“æ„ä½“æŒ‡é’ˆ
+ * @brief  ¹Ø±ÕLEDµÆ
+ * @param  led: LED½á¹¹ÌåÖ¸Õë
  * @retval None
  */
 void Int_LED_turn_off(LED_Struct *led);
 
 /**
- * @brief  ç¿»è½¬LEDç¯
- * @param  led: LEDç»“æ„ä½“æŒ‡é’ˆ
+ * @brief  ·­×ªLEDµÆ
+ * @param  led: LED½á¹¹ÌåÖ¸Õë
  * @retval None
  */
 void Int_LED_toggle(LED_Struct *led);

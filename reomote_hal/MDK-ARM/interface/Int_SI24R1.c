@@ -2,11 +2,11 @@
 #include "Com_debug.h"
 
 
-//å®šä¹‰ä¸€ä¸ªé™æ€å‘é€åœ°å€ => å‘é€åœ°å€ä¸æ¥æ”¶åœ°å€ç›¸åŒ
-uint8_t TX_ADDRESS[TX_ADR_WIDTH] = {0x0A,0x01,0x06,0x0E,0x01};  // å®šä¹‰ä¸€ä¸ªé™æ€å‘é€åœ°å€
+//¶¨ÒåÒ»¸ö¾²Ì¬·¢ËÍµØÖ· => ·¢ËÍµØÖ·Óë½ÓÊÕµØÖ·ÏàÍ¬
+uint8_t TX_ADDRESS[TX_ADR_WIDTH] = {0x0A,0x01,0x06,0x0E,0x01};  // ¶¨ÒåÒ»¸ö¾²Ì¬·¢ËÍµØÖ·
 
 
-//SPIè¯»å†™ä¸€ä¸ªå­—èŠ‚  =>å†™å…¥çš„å­—èŠ‚æ˜¯ä¼ å…¥çš„å‚æ•° è¯»å–çš„å­—èŠ‚æ˜¯è¿”å›å€¼
+//SPI¶ÁĞ´Ò»¸ö×Ö½Ú  =>Ğ´ÈëµÄ×Ö½ÚÊÇ´«ÈëµÄ²ÎÊı ¶ÁÈ¡µÄ×Ö½ÚÊÇ·µ»ØÖµ
 static uint8_t SPI_RW(uint8_t byte)
 {
 	uint8_t rx_data=0;
@@ -18,10 +18,10 @@ static uint8_t SPI_RW(uint8_t byte)
 
 
 /********************************************************
-å‡½æ•°åŠŸèƒ½ï¼šå†™å¯„å­˜å™¨çš„å€¼ï¼ˆå•å­—èŠ‚ï¼‰
-å…¥å£å‚æ•°ï¼šreg:å¯„å­˜å™¨æ˜ å°„åœ°å€ï¼ˆæ ¼å¼ï¼šSI24R1_WRITE_REG|reg)
-							value:å¯„å­˜å™¨çš„å€¼
-è¿”å›å€¼ï¼šçŠ¶æ€å¯„å­˜å™¨çš„å€¼
+º¯Êı¹¦ÄÜ£ºĞ´¼Ä´æÆ÷µÄÖµ£¨µ¥×Ö½Ú£©
+Èë¿Ú²ÎÊı£ºreg:¼Ä´æÆ÷Ó³ÉäµØÖ·£¨¸ñÊ½£ºSI24R1_WRITE_REG|reg)
+							value:¼Ä´æÆ÷µÄÖµ
+·µ»ØÖµ£º×´Ì¬¼Ä´æÆ÷µÄÖµ
 *********************************************************/
 uint8_t Int_SI24R1_Write_Reg(uint8_t reg, uint8_t value)
 {
@@ -37,11 +37,11 @@ uint8_t Int_SI24R1_Write_Reg(uint8_t reg, uint8_t value)
 
 
 /********************************************************
-å‡½æ•°åŠŸèƒ½ï¼šå†™å¯„å­˜å™¨çš„å€¼ï¼ˆå¤šå­—èŠ‚ï¼‰
-å…¥å£å‚æ•°ï¼šreg:å¯„å­˜å™¨æ˜ å°„åœ°å€ï¼ˆæ ¼å¼ï¼šSI24R1_WRITE_REG|reg)
-							pBufï¼šå†™æ•°æ®é¦–åœ°å€
-							sizeï¼šå†™æ•°æ®å­—èŠ‚æ•°
-è¿”å›å€¼ï¼šçŠ¶æ€å¯„å­˜å™¨çš„å€¼
+º¯Êı¹¦ÄÜ£ºĞ´¼Ä´æÆ÷µÄÖµ£¨¶à×Ö½Ú£©
+Èë¿Ú²ÎÊı£ºreg:¼Ä´æÆ÷Ó³ÉäµØÖ·£¨¸ñÊ½£ºSI24R1_WRITE_REG|reg)
+							pBuf£ºĞ´Êı¾İÊ×µØÖ·
+							size£ºĞ´Êı¾İ×Ö½ÚÊı
+·µ»ØÖµ£º×´Ì¬¼Ä´æÆ÷µÄÖµ
 *********************************************************/
 uint8_t Int_SI24R1_Write_Buf(uint8_t reg, const uint8_t *pBuf, uint8_t size)
 {
@@ -60,9 +60,9 @@ uint8_t Int_SI24R1_Write_Buf(uint8_t reg, const uint8_t *pBuf, uint8_t size)
 
 
 /********************************************************
-å‡½æ•°åŠŸèƒ½ï¼šè¯»å¯„å­˜å™¨çš„å€¼ï¼ˆå•å­—èŠ‚ï¼‰
-å…¥å£å‚æ•°ï¼šreg:å¯„å­˜å™¨æ˜ å°„åœ°å€ï¼ˆæ ¼å¼ï¼šSI24R1_READ_REG|reg)
-è¿”å›å€¼ï¼šå¯„å­˜å™¨å€¼							
+º¯Êı¹¦ÄÜ£º¶Á¼Ä´æÆ÷µÄÖµ£¨µ¥×Ö½Ú£©
+Èë¿Ú²ÎÊı£ºreg:¼Ä´æÆ÷Ó³ÉäµØÖ·£¨¸ñÊ½£ºSI24R1_READ_REG|reg)
+·µ»ØÖµ£º¼Ä´æÆ÷Öµ							
 *********************************************************/
 uint8_t Int_SI24R1_Read_Reg(uint8_t reg)
 {
@@ -78,11 +78,11 @@ uint8_t Int_SI24R1_Read_Reg(uint8_t reg)
 
 
 /********************************************************
-å‡½æ•°åŠŸèƒ½ï¼šè¯»å¯„å­˜å™¨çš„å€¼ï¼ˆå¤šå­—èŠ‚ï¼‰
-å…¥å£å‚æ•°ï¼šreg:å¯„å­˜å™¨æ˜ å°„åœ°å€ï¼ˆæ ¼å¼ï¼šSI24R1_READ_REG|reg)
-							pBufï¼šæ¥æ”¶ç¼“å†²åŒºçš„é¦–åœ°å€
-							sizeï¼šè¯»å–å­—èŠ‚æ•°
-è¿”å›å€¼ï¼šçŠ¶æ€å¯„å­˜å™¨çš„å€¼
+º¯Êı¹¦ÄÜ£º¶Á¼Ä´æÆ÷µÄÖµ£¨¶à×Ö½Ú£©
+Èë¿Ú²ÎÊı£ºreg:¼Ä´æÆ÷Ó³ÉäµØÖ·£¨¸ñÊ½£ºSI24R1_READ_REG|reg)
+							pBuf£º½ÓÊÕ»º³åÇøµÄÊ×µØÖ·
+							size£º¶ÁÈ¡×Ö½ÚÊı
+·µ»ØÖµ£º×´Ì¬¼Ä´æÆ÷µÄÖµ
 *********************************************************/
 uint8_t Int_SI24R1_Read_Buf(uint8_t reg, uint8_t *pBuf, uint8_t size)
 {
@@ -91,7 +91,7 @@ uint8_t Int_SI24R1_Read_Buf(uint8_t reg, uint8_t *pBuf, uint8_t size)
   CS_LOW;                                        
   status = SPI_RW(reg);                           
   for(byte_ctr=0;byte_ctr<size;byte_ctr++)
-    pBuf[byte_ctr] = SPI_RW(0);                   //è¯»å–å­—èŠ‚ï¼Œä½å­—èŠ‚åœ¨å‰
+    pBuf[byte_ctr] = SPI_RW(0);                   //¶ÁÈ¡×Ö½Ú£¬µÍ×Ö½ÚÔÚÇ°
   CS_HIGH;                                        
 
   return(status);    
@@ -99,117 +99,118 @@ uint8_t Int_SI24R1_Read_Buf(uint8_t reg, uint8_t *pBuf, uint8_t size)
 
 
 /********************************************************
-å‡½æ•°åŠŸèƒ½ï¼šSI24R1æ¥æ”¶æ¨¡å¼åˆå§‹åŒ–
-å…¥å£å‚æ•°ï¼šæ— 
-è¿”å›å€¼ï¼šæ— 
+º¯Êı¹¦ÄÜ£ºSI24R1½ÓÊÕÄ£Ê½³õÊ¼»¯
+Èë¿Ú²ÎÊı£ºÎŞ
+·µ»ØÖµ£ºÎŞ
 *********************************************************/
 void Int_SI24R1_RX_Mode(void)
 {
 	CE_LOW;
-	Int_SI24R1_Write_Buf(SI24R1_WRITE_REG + RX_ADDR_P0, TX_ADDRESS, TX_ADR_WIDTH);	//æ¥æ”¶è®¾å¤‡æ¥æ”¶é€šé“0ä½¿ç”¨å’Œå‘é€è®¾å¤‡ç›¸åŒçš„å‘é€åœ°å€
-	Int_SI24R1_Write_Reg(SI24R1_WRITE_REG + EN_AA, 0x01);               						//ä½¿èƒ½æ¥æ”¶é€šé“0è‡ªåŠ¨åº”ç­”
-	Int_SI24R1_Write_Reg(SI24R1_WRITE_REG + EN_RXADDR, 0x01);           						//ä½¿èƒ½æ¥æ”¶é€šé“0
-	Int_SI24R1_Write_Reg(SI24R1_WRITE_REG + RF_CH, CHANNEL);                 						//é€‰æ‹©å°„é¢‘é€šé“40
-	Int_SI24R1_Write_Reg(SI24R1_WRITE_REG + RX_PW_P0, TX_PLOAD_WIDTH);  						//æ¥æ”¶é€šé“0é€‰æ‹©å’Œå‘é€é€šé“ç›¸åŒæœ‰æ•ˆæ•°æ®å®½åº¦
-	Int_SI24R1_Write_Reg(SI24R1_WRITE_REG + RF_SETUP, 0x0f);            						//æ•°æ®ä¼ è¾“ç‡2Mbps,å‘å°„åŠŸç‡7dBm
-	Int_SI24R1_Write_Reg(SI24R1_WRITE_REG + CONFIG, 0x0f);              						//CRCä½¿èƒ½ï¼Œ16ä½CRCæ ¡éªŒï¼Œä¸Šç”µï¼Œæ¥æ”¶æ¨¡å¼
-	Int_SI24R1_Write_Reg(SI24R1_WRITE_REG + STATUS, 0xff);  									//æ¸…é™¤æ‰€æœ‰çš„ä¸­æ–­æ ‡å¿—ä½
-	CE_HIGH;                                            									//æ‹‰é«˜CEå¯åŠ¨æ¥æ”¶è®¾å¤‡
+	Int_SI24R1_Write_Buf(SI24R1_WRITE_REG + RX_ADDR_P0, TX_ADDRESS, TX_ADR_WIDTH);	//½ÓÊÕÉè±¸½ÓÊÕÍ¨µÀ0Ê¹ÓÃºÍ·¢ËÍÉè±¸ÏàÍ¬µÄ·¢ËÍµØÖ·
+	Int_SI24R1_Write_Reg(SI24R1_WRITE_REG + EN_AA, 0x01);               						//Ê¹ÄÜ½ÓÊÕÍ¨µÀ0×Ô¶¯Ó¦´ğ
+	Int_SI24R1_Write_Reg(SI24R1_WRITE_REG + EN_RXADDR, 0x01);           						//Ê¹ÄÜ½ÓÊÕÍ¨µÀ0
+	Int_SI24R1_Write_Reg(SI24R1_WRITE_REG + RF_CH, CHANNEL);                 						//Ñ¡ÔñÉäÆµÍ¨µÀ40
+	Int_SI24R1_Write_Reg(SI24R1_WRITE_REG + RX_PW_P0, TX_PLOAD_WIDTH);  						//½ÓÊÕÍ¨µÀ0Ñ¡ÔñºÍ·¢ËÍÍ¨µÀÏàÍ¬ÓĞĞ§Êı¾İ¿í¶È
+	Int_SI24R1_Write_Reg(SI24R1_WRITE_REG + RF_SETUP, 0x0f);            						//Êı¾İ´«ÊäÂÊ2Mbps,·¢Éä¹¦ÂÊ7dBm
+	Int_SI24R1_Write_Reg(SI24R1_WRITE_REG + CONFIG, 0x0f);              						//CRCÊ¹ÄÜ£¬16Î»CRCĞ£Ñé£¬ÉÏµç£¬½ÓÊÕÄ£Ê½
+	Int_SI24R1_Write_Reg(SI24R1_WRITE_REG + STATUS, 0xff);  									//Çå³ıËùÓĞµÄÖĞ¶Ï±êÖ¾Î»
+	CE_HIGH;                                            									//À­¸ßCEÆô¶¯½ÓÊÕÉè±¸
 }						
 
 
 /********************************************************
-å‡½æ•°åŠŸèƒ½ï¼šSI24R1å‘é€æ¨¡å¼åˆå§‹åŒ–
-å…¥å£å‚æ•°ï¼šæ— 
-è¿”å›å€¼ï¼šæ— 
+º¯Êı¹¦ÄÜ£ºSI24R1·¢ËÍÄ£Ê½³õÊ¼»¯
+Èë¿Ú²ÎÊı£ºÎŞ
+·µ»ØÖµ£ºÎŞ
 *********************************************************/
 void Int_SI24R1_TX_Mode(void)
 {
 	CE_LOW;
-	Int_SI24R1_Write_Buf(SI24R1_WRITE_REG + TX_ADDR, TX_ADDRESS, TX_ADR_WIDTH);     	//å†™å…¥å‘é€åœ°å€
-	Int_SI24R1_Write_Buf(SI24R1_WRITE_REG + RX_ADDR_P0, TX_ADDRESS, TX_ADR_WIDTH);  	//ä¸ºäº†åº”ç­”æ¥æ”¶è®¾å¤‡ï¼Œæ¥æ”¶é€šé“0åœ°å€å’Œå‘é€åœ°å€ç›¸åŒ
-	Int_SI24R1_Write_Reg(SI24R1_WRITE_REG + EN_AA, 0x01);       						//ä½¿èƒ½æ¥æ”¶é€šé“0è‡ªåŠ¨åº”ç­”					
-	Int_SI24R1_Write_Reg(SI24R1_WRITE_REG + EN_RXADDR, 0x01);   						//ä½¿èƒ½æ¥æ”¶é€šé“0				
-	Int_SI24R1_Write_Reg(SI24R1_WRITE_REG + SETUP_RETR, 0x0a);  						//è‡ªåŠ¨é‡å‘å»¶æ—¶ç­‰å¾…250us+86us,è‡ªåŠ¨é‡å‘10æ¬¡					
-	Int_SI24R1_Write_Reg(SI24R1_WRITE_REG + RF_CH, CHANNEL);         						//é€‰æ‹©å°„é¢‘é€šé“40					
-	Int_SI24R1_Write_Reg(SI24R1_WRITE_REG + RF_SETUP, 0x0f);    			 			//æ•°æ®ä¼ è¾“ç‡2Mbps,å‘å°„åŠŸç‡7dBm					
-	Int_SI24R1_Write_Reg(SI24R1_WRITE_REG + CONFIG, 0x0e);      						//CRCä½¿èƒ½ï¼Œ16ä½CRCæ ¡éªŒï¼Œä¸Šç”µ				
+	Int_SI24R1_Write_Buf(SI24R1_WRITE_REG + TX_ADDR, TX_ADDRESS, TX_ADR_WIDTH);     	//Ğ´Èë·¢ËÍµØÖ·
+	Int_SI24R1_Write_Buf(SI24R1_WRITE_REG + RX_ADDR_P0, TX_ADDRESS, TX_ADR_WIDTH);  	//ÎªÁËÓ¦´ğ½ÓÊÕÉè±¸£¬½ÓÊÕÍ¨µÀ0µØÖ·ºÍ·¢ËÍµØÖ·ÏàÍ¬
+	Int_SI24R1_Write_Reg(SI24R1_WRITE_REG + EN_AA, 0x01);       						//Ê¹ÄÜ½ÓÊÕÍ¨µÀ0×Ô¶¯Ó¦´ğ					
+	Int_SI24R1_Write_Reg(SI24R1_WRITE_REG + EN_RXADDR, 0x01);   						//Ê¹ÄÜ½ÓÊÕÍ¨µÀ0				
+	Int_SI24R1_Write_Reg(SI24R1_WRITE_REG + SETUP_RETR, 0x0a);  						//×Ô¶¯ÖØ·¢ÑÓÊ±µÈ´ı250us+86us,×Ô¶¯ÖØ·¢10´Î					
+	Int_SI24R1_Write_Reg(SI24R1_WRITE_REG + RF_CH, CHANNEL);         						//Ñ¡ÔñÉäÆµÍ¨µÀ40					
+	Int_SI24R1_Write_Reg(SI24R1_WRITE_REG + RF_SETUP, 0x0f);    			 			//Êı¾İ´«ÊäÂÊ2Mbps,·¢Éä¹¦ÂÊ7dBm					
+	Int_SI24R1_Write_Reg(SI24R1_WRITE_REG + CONFIG, 0x0e);      						//CRCÊ¹ÄÜ£¬16Î»CRCĞ£Ñé£¬ÉÏµç				
 	CE_HIGH;
 }
 
 
 /********************************************************
-å‡½æ•°åŠŸèƒ½ï¼šè¯»å–æ¥æ”¶æ•°æ®   ç¡¬ä»¶ç›´æ¥æ¥æ”¶æ•°æ®ä¿å­˜åˆ°FIFOé˜Ÿåˆ—ä¸­ =>é€šè¿‡çŠ¶æ€æ ‡å¿—ä½åˆ¤æ–­é˜Ÿåˆ—ä¸­æ˜¯å¦æœ‰æ•°æ®
-å…¥å£å‚æ•°ï¼šrxbufï¼šæ¥æ”¶æ•°æ®å­˜æ”¾é¦–åœ°å€
-è¿”å›å€¼ï¼š0ï¼šæ¥æ”¶åˆ°æ•°æ®
-	    1ï¼šæ²¡æœ‰æ¥æ”¶åˆ°æ•°æ®
+º¯Êı¹¦ÄÜ£º¶ÁÈ¡½ÓÊÕÊı¾İ   Ó²¼şÖ±½Ó½ÓÊÕÊı¾İ±£´æµ½FIFO¶ÓÁĞÖĞ =>Í¨¹ı×´Ì¬±êÖ¾Î»ÅĞ¶Ï¶ÓÁĞÖĞÊÇ·ñÓĞÊı¾İ
+Èë¿Ú²ÎÊı£ºrxbuf£º½ÓÊÕÊı¾İ´æ·ÅÊ×µØÖ·
+·µ»ØÖµ£º0£º½ÓÊÕµ½Êı¾İ
+	    1£ºÃ»ÓĞ½ÓÊÕµ½Êı¾İ
 *********************************************************/
 uint8_t Int_SI24R1_RxPacket(uint8_t *rxbuf)
 {
 	uint8_t state;
-	//å°†è¯»å–åˆ°çš„å€¼ åŸå°ä¸åŠ¨å†å†™å›çŠ¶æ€å¯„å­˜å™¨ => å› ä¸ºçŠ¶æ€å¯„å­˜å™¨ä¸­çš„æ ‡å¿—ä½è®¾è®¡ä¸ºå†™1æ¸…é™¤
-	state = Int_SI24R1_Read_Reg(STATUS);  	                //è¯»å–çŠ¶æ€å¯„å­˜å™¨çš„å€¼		                   	  
-	Int_SI24R1_Write_Reg(SI24R1_WRITE_REG+STATUS,state);    //æ¸…é™¤RX_DSä¸­æ–­æ ‡å¿—          
+	//½«¶ÁÈ¡µ½µÄÖµ Ô­·â²»¶¯ÔÙĞ´»Ø×´Ì¬¼Ä´æÆ÷ => ÒòÎª×´Ì¬¼Ä´æÆ÷ÖĞµÄ±êÖ¾Î»Éè¼ÆÎªĞ´1Çå³ı
+	state = Int_SI24R1_Read_Reg(STATUS);  	                //¶ÁÈ¡×´Ì¬¼Ä´æÆ÷µÄÖµ		                   	  
+	Int_SI24R1_Write_Reg(SI24R1_WRITE_REG+STATUS,state);    //Çå³ıRX_DSÖĞ¶Ï±êÖ¾          
 
-	if(state & RX_DR)		//æ¥æ”¶åˆ°æ•°æ®						                         
+	if(state & RX_DR)		//½ÓÊÕµ½Êı¾İ						                         
 	{
-		Int_SI24R1_Read_Buf(RD_RX_PLOAD,rxbuf,TX_PLOAD_WIDTH);     //è¯»å–æ•°æ®
-		Int_SI24R1_Write_Reg(FLUSH_RX,0xff);					   //æ¸…é™¤RX FIFOå¯„å­˜å™¨          
+		Int_SI24R1_Read_Buf(RD_RX_PLOAD,rxbuf,TX_PLOAD_WIDTH);     //¶ÁÈ¡Êı¾İ
+		Int_SI24R1_Write_Reg(FLUSH_RX,0xff);					   //Çå³ıRX FIFO¼Ä´æÆ÷          
 		return 0; 
 	}	   
-	return 1;        //æ²¡æ”¶åˆ°ä»»ä½•æ•°æ®                                           
+	return 1;        //Ã»ÊÕµ½ÈÎºÎÊı¾İ                                           
 }
 
 
 /********************************************************
-å‡½æ•°åŠŸèƒ½:å‘é€ä¸€ä¸ªæ•°æ®åŒ…
-å…¥å£å‚æ•°ï¼štxbufï¼šè¦å‘é€çš„æ•°æ®
-è¿”å›å€¼ï¼š
-		0:å‘é€æˆåŠŸ
-		1ï¼šå‘é€å¤±è´¥
+º¯Êı¹¦ÄÜ:·¢ËÍÒ»¸öÊı¾İ°ü
+Èë¿Ú²ÎÊı£ºtxbuf£ºÒª·¢ËÍµÄÊı¾İ
+·µ»ØÖµ£º
+		0:·¢ËÍ³É¹¦
+		1£º·¢ËÍÊ§°Ü
 *********************************************************/
 uint8_t Int_SI24R1_TxPacket(uint8_t *txbuf)
 {
 	uint8_t state;
-	CE_LOW;														//CEæ‹‰ä½ï¼Œä½¿èƒ½SI24R1é…ç½®												 
-    Int_SI24R1_Write_Buf(WR_TX_PLOAD, txbuf, TX_PLOAD_WIDTH);	  //å†™æ•°æ®åˆ°TX FIFO,32ä¸ªå­—èŠ‚  
- 	CE_HIGH;													//CEç½®é«˜ï¼Œä½¿èƒ½å‘é€													    
-	//æ²¡æœ‰ä½¿ç”¨ä¸­æ–­åˆ¤æ–­æ˜¯å¦å‘é€å®Œæˆ =>ä½¿ç”¨è½®è¯¢è¯»å–çŠ¶æ€æ ‡å¿—ä½
-	//while(IRQ == 1);												//ç­‰å¾…å‘é€å®Œæˆ								
-	state = Int_SI24R1_Read_Reg(STATUS);  								//è¯»å–çŠ¶æ€å¯„å­˜å™¨çš„å€¼
+	CE_LOW;														//CEÀ­µÍ£¬Ê¹ÄÜSI24R1ÅäÖÃ												 
+    Int_SI24R1_Write_Buf(WR_TX_PLOAD, txbuf, TX_PLOAD_WIDTH);	  //Ğ´Êı¾İµ½TX FIFO,32¸ö×Ö½Ú  
+ 	CE_HIGH;													//CEÖÃ¸ß£¬Ê¹ÄÜ·¢ËÍ													    
+	//Ã»ÓĞÊ¹ÓÃÖĞ¶ÏÅĞ¶ÏÊÇ·ñ·¢ËÍÍê³É =>Ê¹ÓÃÂÖÑ¯¶ÁÈ¡×´Ì¬±êÖ¾Î»
+	//while(IRQ == 1);												//µÈ´ı·¢ËÍÍê³É								
+	state = Int_SI24R1_Read_Reg(STATUS);  								//¶ÁÈ¡×´Ì¬¼Ä´æÆ÷µÄÖµ
 	while(((state&TX_DS)==0) && ((state&MAX_RT)==0))
 	{
 		state=Int_SI24R1_Read_Reg(STATUS);
+		vTaskDelay(1);
 	}			    
-	Int_SI24R1_Write_Reg(SI24R1_WRITE_REG+STATUS, state); 			//æ¸…é™¤TX_DSæˆ–MAX_RTä¸­æ–­æ ‡å¿—				
-	if(state&MAX_RT)												//è¾¾åˆ°æœ€å¤§é‡å‘æ¬¡æ•°						
+	Int_SI24R1_Write_Reg(SI24R1_WRITE_REG+STATUS, state); 			//Çå³ıTX_DS»òMAX_RTÖĞ¶Ï±êÖ¾				
+	if(state&MAX_RT)												//´ïµ½×î´óÖØ·¢´ÎÊı						
 	{
-		Int_SI24R1_Write_Reg(FLUSH_TX,0xff);						//æ¸…é™¤TX FIFOå¯„å­˜å™¨				    
+		Int_SI24R1_Write_Reg(FLUSH_TX,0xff);						//Çå³ıTX FIFO¼Ä´æÆ÷				    
 		return 1; 
 	}
-	if(state&TX_DS)	//å‘é€å®Œæˆ
+	if(state&TX_DS)	//·¢ËÍÍê³É
 	{																		 
 		return 0;
 	}
-	return 1;			//å‘é€å¤±è´¥																		
+	return 1;			//·¢ËÍÊ§°Ü																		
 }
 
 /**
- * @brief SI24R1çš„åˆå§‹åŒ–æ£€æµ‹
+ * @brief SI24R1µÄ³õÊ¼»¯¼ì²â
  * 
- * @return uint8_t 0ï¼šæ£€æµ‹æˆåŠŸ 1ï¼šæ£€æµ‹å¤±è´¥
+ * @return uint8_t 0£º¼ì²â³É¹¦ 1£º¼ì²âÊ§°Ü
  */
 
 uint8_t si24r1_rx_buff[5]={0};
 uint8_t Int_SI24R1_Check(void)
 {
-	//1.æµ‹è¯•SPIé€šä¿¡èƒ½å¤Ÿæ­£å¸¸è¯»å†™å¯„å­˜å™¨
-	//1.0 SI24R1èŠ¯ç‰‡éœ€è¦å…ˆè¯»å–ä¸€æ¬¡ ä¿è¯SPIæ­£å¸¸ä¹‹åå†å†™å…¥
+	//1.²âÊÔSPIÍ¨ĞÅÄÜ¹»Õı³£¶ÁĞ´¼Ä´æÆ÷
+	//1.0 SI24R1Ğ¾Æ¬ĞèÒªÏÈ¶ÁÈ¡Ò»´Î ±£Ö¤SPIÕı³£Ö®ºóÔÙĞ´Èë
 	Int_SI24R1_Read_Buf(SI24R1_READ_REG + TX_ADDR, si24r1_rx_buff, TX_ADR_WIDTH);
-	//1.1å†™å…¥å‘é€åœ°å€
-	Int_SI24R1_Write_Buf(SI24R1_WRITE_REG + TX_ADDR, TX_ADDRESS, TX_ADR_WIDTH);	//å†™å…¥å‘é€åœ°å€
+	//1.1Ğ´Èë·¢ËÍµØÖ·
+	Int_SI24R1_Write_Buf(SI24R1_WRITE_REG + TX_ADDR, TX_ADDRESS, TX_ADR_WIDTH);	//Ğ´Èë·¢ËÍµØÖ·
 
-	//1.2è¯»å–åŒæ ·çš„æ•°æ®
+	//1.2¶ÁÈ¡Í¬ÑùµÄÊı¾İ
 	Int_SI24R1_Read_Buf(SI24R1_READ_REG + TX_ADDR, si24r1_rx_buff, TX_ADR_WIDTH);
 
 	for(uint8_t i=0;i<TX_ADR_WIDTH;i++)
@@ -224,21 +225,21 @@ uint8_t Int_SI24R1_Check(void)
 
 
 /**
- * @brief ç¡¬ä»¶æ¥å£å±‚SI24R1çš„åˆå§‹åŒ–
+ * @brief Ó²¼ş½Ó¿Ú²ãSI24R1µÄ³õÊ¼»¯
  * 
  */
 void Int_SI24R1_Init(void)
 {
-	//ä¸Šç”µä¹‹åçš„èŠ¯ç‰‡å»¶æ—¶ >100ms
+	//ÉÏµçÖ®ºóµÄĞ¾Æ¬ÑÓÊ± >100ms
 	HAL_Delay(100);
-	//1.æ ¡éªŒæ£€æµ‹
+	//1.Ğ£Ñé¼ì²â
 	while (Int_SI24R1_Check()==1)
 	{
-		//æ¯ä¸¤æ¬¡æ£€æµ‹é—´éš”10ms
+		//Ã¿Á½´Î¼ì²â¼ä¸ô10ms
 		HAL_Delay(10);
 	}
 
-	//2.è®¾ç½®SI24R1é»˜è®¤çŠ¶æ€ä¸ºæ¥æ”¶æ¨¡å¼ =>æ¯æ¬¡å‘é€æ•°æ®çš„æ—¶å€™ åˆ‡æ¢åˆ°å‘é€æ¨¡å¼
+	//2.ÉèÖÃSI24R1Ä¬ÈÏ×´Ì¬Îª½ÓÊÕÄ£Ê½ =>Ã¿´Î·¢ËÍÊı¾İµÄÊ±ºò ÇĞ»»µ½·¢ËÍÄ£Ê½
 	Int_SI24R1_RX_Mode();
 	debug_printf("SI24R1 Init Success!\n");
 }

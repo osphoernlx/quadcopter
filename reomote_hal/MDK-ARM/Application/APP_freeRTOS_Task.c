@@ -1,64 +1,74 @@
 #include "APP_freeRTOS_Task.h"
 
-//STM32F109C8T6 => SRAM 20K =>åˆ†é…12Kç»™æ“ä½œç³»ç»Ÿ
+//STM32F109C8T6 => SRAM 20K =>·ÖÅä12K¸ø²Ù×÷ÏµÍ³
 
-//ç”µæºç®¡ç†ä»»åŠ¡
+//µçÔ´¹ÜÀíÈÎÎñ
 void power_task(void *args);
-//æœ€å°æ¨èå†™128 128*4=512B 
+//×îĞ¡ÍÆ¼öĞ´128 128*4=512B 
 #define POWER_TASK_STACK_SIZE 128
-//ä»»åŠ¡ä¼˜å…ˆçº§ =>æ•°å€¼è¶Šå° ä¼˜å…ˆçº§è¶Šä½ => 0~4 =>ä¸æ¨èä½¿ç”¨æœ€å°ä¼˜å…ˆçº§0
+//ÈÎÎñÓÅÏÈ¼¶ =>ÊıÖµÔ½Ğ¡ ÓÅÏÈ¼¶Ô½µÍ => 0~4 =>²»ÍÆ¼öÊ¹ÓÃ×îĞ¡ÓÅÏÈ¼¶0
 #define POWER_TASK_PRIORITY 4
 TaskHandle_t Power_Task_Handler;
 #define POWER_TASK_PERIOD 10000
 
-//é€šè®¯ä»»åŠ¡
+//Í¨Ñ¶ÈÎÎñ
 void com_task(void *args);
-//æœ€å°æ¨èå†™128 128*4=512B 
+//×îĞ¡ÍÆ¼öĞ´128 128*4=512B 
 #define COM_TASK_STACK_SIZE 128
-//ä»»åŠ¡ä¼˜å…ˆçº§ =>æ•°å€¼è¶Šå° ä¼˜å…ˆçº§è¶Šä½ => 0~4 =>ä¸æ¨èä½¿ç”¨æœ€å°ä¼˜å…ˆçº§0
+//ÈÎÎñÓÅÏÈ¼¶ =>ÊıÖµÔ½Ğ¡ ÓÅÏÈ¼¶Ô½µÍ => 0~4 =>²»ÍÆ¼öÊ¹ÓÃ×îĞ¡ÓÅÏÈ¼¶0
 #define COM_TASK_PRIORITY 3
 TaskHandle_t Com_Task_Handler;
-//ä»»åŠ¡å‘¨æœŸ
+//ÈÎÎñÖÜÆÚ
 #define COM_TASK_PERIOD 6
 
-
+//°´¼üÈÎÎñ
+void key_task(void *args);
+//×îĞ¡ÍÆ¼öĞ´128 128*4=512B 
+#define KEY_TASK_STACK_SIZE 128
+//ÈÎÎñÓÅÏÈ¼¶ =>ÊıÖµÔ½Ğ¡ ÓÅÏÈ¼¶Ô½¸ß=> 0~4 =>²»ÍÆ¼öÊ¹ÓÃ×îĞ¡ÓÅÏÈ¼¶0
+#define KEY_TASK_PRIORITY 2
+TaskHandle_t Key_Task_Handler;
+//¶¨ÒåÈÎÎñµÄÖÜÆÚ
+#define KEY_TASK_PERIOD 20
 
 /**
- * @brief  å¯åŠ¨freeRTOSæ“ä½œç³»ç»Ÿ
+* @brief  Æô¶¯freeRTOS²Ù×÷ÏµÍ³
  * @param  None
  * @retval None
  */
 
 void App_FreeRTOS_Task_start(void)
 {
-    //åˆ›å»ºç”µæºç®¡ç†ä»»åŠ¡
+    //1.´´½¨µçÔ´¹ÜÀíÈÎÎñ
     xTaskCreate(power_task,"power_task",POWER_TASK_STACK_SIZE,NULL,POWER_TASK_PRIORITY,&Power_Task_Handler);
 
-    //åˆ›å»ºé€šè®¯ä»»åŠ¡
+    //2.´´½¨Í¨Ñ¶ÈÎÎñ
     xTaskCreate(com_task,"com_task",COM_TASK_STACK_SIZE,NULL,COM_TASK_PRIORITY,&Com_Task_Handler);
 
-    //å¼€å¯ä»»åŠ¡è°ƒåº¦
+    //3.´´½¨°´¼üÈÎÎñ
+    xTaskCreate(key_task,"key_task",KEY_TASK_STACK_SIZE,NULL,KEY_TASK_PRIORITY,&Key_Task_Handler);
+    //¿ªÆôÈÎÎñµ÷¶È
     vTaskStartScheduler();
 
 }
 
 void power_task(void *args)
 {
-    //è·å–å½“å‰çš„åŸºå‡†æ—¶é—´ 
+    //»ñÈ¡µ±Ç°µÄ»ù×¼Ê±¼ä 
     TickType_t xLastWakeTime = xTaskGetTickCount();
     while(1)
     {
 
-        //æ¯10sæ‰§è¡Œä¸€æ¬¡ => å¯åŠ¨ç”µæº é¿å…è‡ªåŠ¨å…³æœº
+        //Ã¿10sÖ´ĞĞÒ»´Î => Æô¶¯µçÔ´ ±ÜÃâ×Ô¶¯¹Ø»ú
         vTaskDelayUntil(&xLastWakeTime, POWER_TASK_PERIOD);
-        //å¯åŠ¨ç”µæº
+        //Æô¶¯µçÔ´
         Int_IP5305T_start();
     }
 }
 
 
 /**
- * @brief  é€šè®¯ä»»åŠ¡
+ * @brief  Í¨Ñ¶ÈÎÎñ
  * @param  None
  * @retval None
  */
@@ -67,14 +77,14 @@ uint8_t com_buff[TX_PLOAD_WIDTH]={0};
 
 void com_task(void *args)
 {
-    //è·å–å½“å‰çš„åŸºå‡†æ—¶é—´ 
+    //»ñÈ¡µ±Ç°µÄ»ù×¼Ê±¼ä 
     TickType_t xLastWakeTime = xTaskGetTickCount();
     while(1)
     {
-        //è°ƒç”¨SI24R1çš„æ¥å£ å‘é€æ•°æ®
-        //1.è¿›å…¥TXæ¨¡å¼
+        //µ÷ÓÃSI24R1µÄ½Ó¿Ú ·¢ËÍÊı¾İ
+        //1.½øÈëTXÄ£Ê½
         Int_SI24R1_TX_Mode();
-        //2.å‘é€æ•°æ®
+        //2.·¢ËÍÊı¾İ
         com_buff[0]='h';
         com_buff[1]='e';
         com_buff[2]='l';
@@ -83,10 +93,31 @@ void com_task(void *args)
         com_buff[5]='!';
         Int_SI24R1_TxPacket(com_buff);
 
-        //æ¢å¤åˆ°RXæ¨¡å¼
+        //»Ö¸´µ½RXÄ£Ê½
         Int_SI24R1_RX_Mode();
 
-        //æ¯6msæ‰§è¡Œä¸€æ¬¡ 
+        //Ã¿6msÖ´ĞĞÒ»´Î 
         vTaskDelayUntil(&xLastWakeTime, COM_TASK_PERIOD);
+    }
+}
+
+/**
+ * @brief  °´¼üÈÎÎñ
+ * 
+ */
+void key_task(void *args)
+{
+
+    //»ñÈ¡µ±Ç°µÄ»ù×¼Ê±¼ä 
+    TickType_t xLastWakeTime = xTaskGetTickCount();
+    while(1)
+    {
+        KEY_type key = Int_key_get();
+        if(key!=KEY_NONE)
+        {
+            debug_printf("key=%d\n",key);
+        }
+        //Ã¿20msÖ´ĞĞÒ»´Î
+        vTaskDelayUntil(&xLastWakeTime, KEY_TASK_PERIOD);
     }
 }

@@ -98,14 +98,14 @@ int main(void)
   MX_TIM4_Init();
   MX_SPI1_Init();
   /* USER CODE BEGIN 2 */
-  //å®ç°ï¿½?åˆçš„æ—¥å¿—è¾“å‡ºæ‰“å°
+  //ÊµÏÖ×î³õµÄÈÕÖ¾Êä³ö´òÓ¡
   //HAL_UART_Transmit(&huart2, (uint8_t *)"Hello World!\r\n", 14, 0xFFFF);
 
-  //ä½¿ç”¨Cè¯­è¨€æ ‡å‡†çš„æ—¥å¿—è¾“å‡ºåŠŸèƒ½PRINTF
+  //Ê¹ÓÃCÓïÑÔ±ê×¼µÄÈÕÖ¾Êä³ö¹¦ÄÜPRINTF
   debug_printf("Hello World!\r\n");
 
   Int_SI24R1_Init();
-  //å¯ç”¨freeRTOSæ“ä½œç³»ç»Ÿ=>åç»­çš„ä»£ç éƒ½ä¸å†æ‰§è¡Œ
+  //ÆôÓÃfreeRTOS²Ù×÷ÏµÍ³=>ºóĞøµÄ´úÂë¶¼²»ÔÙÖ´ĞĞ
   App_FreeRTOS_Task_start();
   /* USER CODE END 2 */
 

@@ -933,6 +933,16 @@
               <FileType>5</FileType>
               <FilePath>.\interface\Int_SI24R1.h</FilePath>
             </File>
+            <File>
+              <FileName>Int_key.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\interface\Int_key.c</FilePath>
+            </File>
+            <File>
+              <FileName>Int_key.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\interface\Int_key.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

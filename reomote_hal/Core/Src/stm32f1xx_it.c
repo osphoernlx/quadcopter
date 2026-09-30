@@ -159,10 +159,10 @@ void DebugMon_Handler(void)
 void SysTick_Handler(void)
 {
   /* USER CODE BEGIN SysTick_IRQn 0 */
-  //鎵嬪姩璋冪敤freertos鐨勭郴缁熻妭鎷嶅嚱鏁皊ystick涓柇
+  //手动调用freertos的系统节拍函数systick中断
   if (xTaskGetSchedulerState() != taskSCHEDULER_NOT_STARTED)
   {
-    //鍒ゆ柇freertos璋冨害鍣ㄦ槸鍚﹀凡缁忓惎鍔? 濡傛灉宸茬粡鍚姩 閭ｄ箞灏辫皟鐢╢reertos鐨勭郴缁熻妭鎷嶅嚱鏁皊ystick涓柇
+    //判断freertos调度器是否已经启动 如果已经启动 那么就调用freertos的系统节拍函数systick中断
     xPortSysTickHandler();
   }
   /* USER CODE END SysTick_IRQn 0 */

@@ -5,21 +5,21 @@
 #include "Com_debug.h"
 typedef struct
 {
-    TIM_HandleTypeDef *htim; //å®šæ—¶å™¨å¥æŸ„
-    uint16_t channel;        //å®šæ—¶å™¨é€šé“
-    uint16_t speed;          //ç”µæœºé€Ÿåº¦
+    TIM_HandleTypeDef *htim; //¶¨Ê±Æ÷¾ä±ú
+    uint16_t channel;        //¶¨Ê±Æ÷Í¨µÀ
+    uint16_t speed;          //µç»úËÙ¶È
 }Motor_Struct;
 /**
- * @brief  ä¼ å…¥çš„å‚æ•°å…¶å®æ˜¯æ¯”è¾ƒå€¼ æœ€å¤§ä¸º1000 é»˜è®¤å€¼ä¸º200
- * @param  motor: ç”µæœºç»“æ„ä½“æŒ‡é’ˆ
+ * @brief  ´«ÈëµÄ²ÎÊıÆäÊµÊÇ±È½ÏÖµ ×î´óÎª1000 Ä¬ÈÏÖµÎª200
+ * @param  motor: µç»ú½á¹¹ÌåÖ¸Õë
  * @retval None
  */
 void Int_motor_set_speed(Motor_Struct *motor);
 
 
 /**
- * @brief  å¯åŠ¨ç”µæœº ä¼ å…¥å…·ä½“ç”µæœºçš„æŒ‡é’ˆ
- * @param  motor: ç”µæœºç»“æ„ä½“æŒ‡é’ˆ
+ * @brief  Æô¶¯µç»ú ´«Èë¾ßÌåµç»úµÄÖ¸Õë
+ * @param  motor: µç»ú½á¹¹ÌåÖ¸Õë
  * @retval None
  */
 void Int_motor_start(Motor_Struct *motor);

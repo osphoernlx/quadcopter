@@ -1,23 +1,23 @@
 #include "Int_motor.h"
 
 /**
- * @brief  ä¼ å…¥çš„å‚æ•°å…¶å®æ˜¯æ¯”è¾ƒå€¼ æœ€å¤§ä¸º1000 é»˜è®¤å€¼ä¸º200
- * @param  motor: ç”µæœºç»“æ„ä½“æŒ‡é’ˆ
+ * @brief  ´«ÈëµÄ²ÎÊıÆäÊµÊÇ±È½ÏÖµ ×î´óÎª1000 Ä¬ÈÏÖµÎª200
+ * @param  motor: µç»ú½á¹¹ÌåÖ¸Õë
  * @retval None
  */
 void Int_motor_set_speed(Motor_Struct *motor)
 {
   if(motor->speed > 1000)
   {
-    debug_printf("ç”µæœºé€Ÿåº¦è®¾ç½®è¿‡å¤§ æœ€å¤§ä¸º1000\r\n");
+    debug_printf("µç»úËÙ¶ÈÉèÖÃ¹ı´ó ×î´óÎª1000\r\n");
     return;
   }
   __HAL_TIM_SET_COMPARE(motor->htim, motor->channel, motor->speed);
 }
 
 /**
- * @brief  å¯åŠ¨ç”µæœº ä¼ å…¥å…·ä½“ç”µæœºçš„æŒ‡é’ˆ
- * @param  motor: ç”µæœºç»“æ„ä½“æŒ‡é’ˆ
+ * @brief  Æô¶¯µç»ú ´«Èë¾ßÌåµç»úµÄÖ¸Õë
+ * @param  motor: µç»ú½á¹¹ÌåÖ¸Õë
  * @retval None
  */
 void Int_motor_start(Motor_Struct *motor)

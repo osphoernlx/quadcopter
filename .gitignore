@@ -10,6 +10,7 @@
 # VS Code
 .vscode/extensions/
 .vscode/*.log
+**/.vscode/settings.json
 
 # 编译产物
 Debug/

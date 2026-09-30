@@ -4,7 +4,7 @@
 #include "main.h"
 
 /**
- * @brief  è¿æ¥çŠ¶æ€æšä¸¾
+ * @brief  Á¬½Ó×´Ì¬Ã¶¾Ù
  * 
  */
 typedef enum
@@ -14,7 +14,7 @@ typedef enum
 }Remote_State;
 
 /**
- * @brief  é£è¡ŒçŠ¶æ€æšä¸¾
+ * @brief  ·ÉĞĞ×´Ì¬Ã¶¾Ù
  * 
  */
 typedef enum

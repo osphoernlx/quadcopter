@@ -78,11 +78,11 @@ configKERNEL_INTERRUPT_PRIORITY setting.  Here 15 corresponds to the lowest
 NVIC value of 255. */
 #define configLIBRARY_KERNEL_INTERRUPT_PRIORITY	15
 
-//ä½¿ç”¨å®å®šä¹‰æ›¿ä»£
+//Ê¹ÓÃºê¶¨ÒåÌæ´ú
 #define xPortPendSVHandler PendSV_Handler
 #define vPortSVCHandler SVC_Handler
-//ä¸èƒ½ä½¿ç”¨æ›¿ä»£systick å› ä¸ºé‡Œé¢æœ‰å†…å®¹
-//éœ€è¦æ‰“å¼€èƒ½å¤ŸæŸ¥è¯¢freertosè°ƒåº¦çŠ¶æ€
+//²»ÄÜÊ¹ÓÃÌæ´úsystick ÒòÎªÀïÃæÓĞÄÚÈİ
+//ĞèÒª´ò¿ªÄÜ¹»²éÑ¯freertosµ÷¶È×´Ì¬
 #define INCLUDE_xTaskGetSchedulerState 1
 
 #endif /* FREERTOS_CONFIG_H */

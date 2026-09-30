@@ -1,6 +1,6 @@
 #include "Com_debug.h"
 
-//é‡å®šå‘ç¼–å†™ä¸€ä¸ªå‡½æ•°
+//ÖØ¶¨Ïò±àĞ´Ò»¸öº¯Êı
 int fputc(int ch, FILE *f) {
     HAL_UART_Transmit(&huart1, (uint8_t *)&ch, 1, 0xFFFF);
     return ch;

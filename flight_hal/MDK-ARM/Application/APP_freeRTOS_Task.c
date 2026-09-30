@@ -3,15 +3,15 @@
 //STM32F109C8T6 => SRAM 20K =>
 
 
-//å†…å­˜ç®¡ç† => Cè¯­è¨€ä¸­çš„ç»“æ„ä½“é€šå¸¸ä¿å­˜åœ¨å †ï¿½? ä¸ä¼šè‡ªåŠ¨åƒåœ¾å›æ”¶ => å§‹ç»ˆä½¿ç”¨åŒä¸€ä¸ªç»“æ„ä½“ ä¸æ–­å¾ªç¯ä½¿ç”¨
+//ÄÚ´æ¹ÜÀí => CÓïÑÔÖĞµÄ½á¹¹ÌåÍ¨³£±£´æÔÚ¶ÑÖĞ ²»»á×Ô¶¯À¬»ø»ØÊÕ => Ê¼ÖÕÊ¹ÓÃÍ¬Ò»¸ö½á¹¹Ìå ²»¶ÏÑ­»·Ê¹ÓÃ
 
-//ç”µæœºç»“æ„ï¿½?
+//µç»ú½á¹¹Ìå
 Motor_Struct left_top_motor = {.htim = &htim3,.channel = TIM_CHANNEL_1,.speed = 200};
 Motor_Struct left_bottom_motor = {.htim = &htim4,.channel = TIM_CHANNEL_4,.speed = 200};
 Motor_Struct right_top_motor = {.htim = &htim2,.channel = TIM_CHANNEL_2,.speed = 200};
 Motor_Struct right_bottom_motor = {.htim = &htim1,.channel = TIM_CHANNEL_3,.speed = 200};
 
-//LEDç»“æ„ï¿½?
+//LED½á¹¹Ìå
 LED_Struct left_top_led = {.port =LED1_GPIO_Port, .pin = LED1_Pin};
 LED_Struct right_top_led = {.port =LED2_GPIO_Port, .pin = LED2_Pin};
 LED_Struct right_bottom_led = {.port =LED3_GPIO_Port, .pin = LED3_Pin};
@@ -19,109 +19,111 @@ LED_Struct left_bottom_led = {.port =LED4_GPIO_Port, .pin = LED4_Pin};
 
 
 
-//è¡¨ç¤ºå½“å‰è¿æ¥çŠ¶ï¿½?
+//±íÊ¾µ±Ç°Á¬½Ó×´Ì¬
 Remote_State remote_state = REMOTE_DISCONNECTED;
 
-//è¡¨ç¤ºå½“å‰çš„é£è¡ŒçŠ¶ï¿½?
+//±íÊ¾µ±Ç°µÄ·ÉĞĞ×´Ì¬
 Flight_State flight_state = FAIL;
 
 
-//ç”µæºç®¡ç†ä»»åŠ¡
+//µçÔ´¹ÜÀíÈÎÎñ
 void power_task(void *args);
-//æœ€å°æ¨èå†™128 128*4=512B 
+//×îĞ¡ÍÆ¼öĞ´128 128*4=512B 
 #define POWER_TASK_STACK_SIZE 128
-//ä»»åŠ¡ä¼˜å…ˆï¿½? =>æ•°å€¼è¶Šï¿½? ä¼˜å…ˆçº§è¶Šï¿½? => 0~4 =>ä¸æ¨èä½¿ç”¨æœ€å°ä¼˜å…ˆçº§0
+//ÈÎÎñÓÅÏÈ¼¶ =>ÊıÖµÔ½´ó ÓÅÏÈ¼¶Ô½¸ß => 0~4 =>²»ÍÆ¼öÊ¹ÓÃ×îĞ¡ÓÅÏÈ¼¶0
 #define POWER_TASK_PRIORITY 4
 TaskHandle_t Power_Task_Handler;
-//å®šä¹‰ä»»åŠ¡çš„å‘¨ï¿½?
+//¶¨ÒåÈÎÎñµÄÖÜÆÚ
 #define POWER_TASK_PERIOD 10000
 
 
-//é£è¡Œæ§åˆ¶ä»»åŠ¡
+//·ÉĞĞ¿ØÖÆÈÎÎñ
 void flight_control_task(void *args);
-//æœ€å°æ¨èå†™128 128*4=512B 
+//×îĞ¡ÍÆ¼öĞ´128 128*4=512B 
 #define FLIGHT_CONTROL_TASK_STACK_SIZE 128
-//ä»»åŠ¡ä¼˜å…ˆï¿½? =>æ•°å€¼è¶Šï¿½? ä¼˜å…ˆçº§è¶Šï¿½? => 0~4 =>ä¸æ¨èä½¿ç”¨æœ€å°ä¼˜å…ˆçº§0
+//ÈÎÎñÓÅÏÈ¼¶ =>ÊıÖµÔ½´ó ÓÅÏÈ¼¶Ô½¸ß => 0~4 =>²»ÍÆ¼öÊ¹ÓÃ×îĞ¡ÓÅÏÈ¼¶0
 #define FLIGHT_CONTROL_TASK_PRIORITY 3
 TaskHandle_t Flight_Control_Task_Handler;
-//å®šä¹‰ä»»åŠ¡çš„å‘¨ï¿½?
+//¶¨ÒåÈÎÎñµÄÖÜÆÚ
 #define FLIGHT_CONTROL_TASK_PERIOD 6
 
-//LEDç¯æ§ä»»åŠ¡
+//LEDµÆ¿ØÈÎÎñ
 void led_task(void *args);
-//æœ€å°æ¨èå†™128 128*4=512B 
+//×îĞ¡ÍÆ¼öĞ´128 128*4=512B 
 #define LED_TASK_STACK_SIZE 128
-//ä»»åŠ¡ä¼˜å…ˆï¿½? =>æ•°å€¼è¶Šï¿½? ä¼˜å…ˆçº§è¶Šï¿½? => 0~4 =>ä¸æ¨èä½¿ç”¨æœ€å°ä¼˜å…ˆçº§0
+//ÈÎÎñÓÅÏÈ¼¶ =>ÊıÖµÔ½´ó ÓÅÏÈ¼¶Ô½¸ß => 0~4 =>²»ÍÆ¼öÊ¹ÓÃ×îĞ¡ÓÅÏÈ¼¶0
 #define LED_TASK_PRIORITY 1
 TaskHandle_t Led_Task_Handler;
-//å®šä¹‰ä»»åŠ¡çš„å‘¨ï¿½?
+//¶¨ÒåÈÎÎñµÄÖÜÆÚ
 #define LED_TASK_PERIOD 100
 
 
-//é€šè®¯ä»»åŠ¡
+//Í¨Ñ¶ÈÎÎñ
 void com_task(void *args);
-//æœ€å°æ¨èå†™128 128*4=512B 
+//×îĞ¡ÍÆ¼öĞ´128 128*4=512B 
 #define COM_TASK_STACK_SIZE 128
-//ä»»åŠ¡ä¼˜å…ˆï¿½? =>æ•°å€¼è¶Šï¿½? ä¼˜å…ˆçº§è¶Šï¿½? => 0~4 =>ä¸æ¨èä½¿ç”¨æœ€å°ä¼˜å…ˆçº§0
+//ÈÎÎñÓÅÏÈ¼¶ =>ÊıÖµÔ½´ó ÓÅÏÈ¼¶Ô½¸ß => 0~4 =>²»ÍÆ¼öÊ¹ÓÃ×îĞ¡ÓÅÏÈ¼¶0
 #define COM_TASK_PRIORITY 2
 TaskHandle_t Com_Task_Handler;
-//ä»»åŠ¡å‘¨æœŸ
+//ÈÎÎñÖÜÆÚ
 #define COM_TASK_PERIOD 6
 
 
+
+
 /**
- * @brief  å¯åŠ¨freeRTOSæ“ä½œç³»ç»Ÿ
+ * @brief  Æô¶¯freeRTOS²Ù×÷ÏµÍ³
  * @param  None
  * @retval None
  */
 
 void App_FreeRTOS_Task_start(void)
 {
-    //1.åˆ›å»ºç”µæºç®¡ç†ä»»åŠ¡
+    //1.´´½¨µçÔ´¹ÜÀíÈÎÎñ
     xTaskCreate(power_task,"power_task",POWER_TASK_STACK_SIZE,NULL,POWER_TASK_PRIORITY,&Power_Task_Handler);
-    //2.åˆ›å»ºé£è¡Œæ§åˆ¶ä»»åŠ¡
+    //2.´´½¨·ÉĞĞ¿ØÖÆÈÎÎñ
     xTaskCreate(flight_control_task,"flight_control_task",FLIGHT_CONTROL_TASK_STACK_SIZE,NULL,FLIGHT_CONTROL_TASK_PRIORITY,&Flight_Control_Task_Handler);
-    //3.åˆ›å»ºLEDç¯æ§ä»»åŠ¡
+    //3.´´½¨LEDµÆ¿ØÈÎÎñ
     xTaskCreate(led_task,"led_task",FLIGHT_CONTROL_TASK_STACK_SIZE,NULL,FLIGHT_CONTROL_TASK_PRIORITY,&Led_Task_Handler);
-    //4.åˆ›å»ºé€šè®¯ä»»åŠ¡
+    //4.´´½¨Í¨Ñ¶ÈÎÎñ
     xTaskCreate(com_task,"com_task",COM_TASK_STACK_SIZE,NULL,COM_TASK_PRIORITY,&Com_Task_Handler);
-    //5.å¼€å¯ä»»åŠ¡è°ƒï¿½?
+    //5.¿ªÆôÈÎÎñµ÷¶ÈÆ÷
     vTaskStartScheduler();
 }
 
 /**
- * @brief  ç”µæºç®¡ç†ä»»åŠ¡
+ * @brief  µçÔ´¹ÜÀíÈÎÎñ
  * 
  */
 void power_task(void *args)
 {
-    //è·å–å½“å‰çš„åŸºå‡†æ—¶ï¿½? 
+    //»ñÈ¡µ±Ç°µÄ»ù×¼Ê±¼ä 
     TickType_t xLastWakeTime = xTaskGetTickCount();
     while(1)
     {
 
-        //ï¿½?10sæ‰§è¡Œä¸€ï¿½? => å¯åŠ¨ç”µæº é¿å…è‡ªåŠ¨å…³æœº
+        //Ã¿10sÖ´ĞĞÒ»´Î => Æô¶¯µçÔ´ ±ÜÃâ×Ô¶¯¹Ø»ú
         vTaskDelayUntil(&xLastWakeTime, POWER_TASK_PERIOD);
-        //å¯åŠ¨ç”µæº
+        //Æô¶¯µçÔ´
         Int_IP5305T_start();
     }
 }
 /**
- * @brief  é£è¡Œæ§åˆ¶ä»»åŠ¡
+ * @brief  ·ÉĞĞ¿ØÖÆÈÎÎñ
  * 
  */
 void flight_control_task(void *args)
 {
-    //è·å–å½“å‰çš„åŸºå‡†æ—¶ï¿½? 
+    //»ñÈ¡µ±Ç°µÄ»ù×¼Ê±¼ä 
     TickType_t xLastWakeTime = xTaskGetTickCount();
     while(1)
     {
-      //1.è®¾ç½®ç”µæœºçš„è½¬ï¿½?
+      //1.ÉèÖÃµç»úµÄ×ªËÙ
       left_top_motor. speed = 400;
-      //2.ç›´æ¥å¯åŠ¨ç”µæœº
+      //2.Ö±½ÓÆô¶¯µç»ú
     //  Int_motor_start(&left_top_motor);
     //  Int_motor_start(&right_bottom_motor);
-      //ï¿½?6msæ‰§è¡Œä¸€ï¿½?
+      //Ã¿6msÖ´ĞĞÒ»´Î
       vTaskDelayUntil(&xLastWakeTime, FLIGHT_CONTROL_TASK_PERIOD);
 
     }
@@ -129,38 +131,38 @@ void flight_control_task(void *args)
 
 
 /**
- * @brief  LEDç¯æ§ä»»åŠ¡
+ * @brief  LEDµÆ¿ØÈÎÎñ
  * 
  * 
  */
 void led_task(void *args)
 {
-  //è·å–å½“å‰çš„åŸºå‡†æ—¶ï¿½?
+  //»ñÈ¡µ±Ç°µÄ»ù×¼Ê±¼ä
   TickType_t xLastWakeTime = xTaskGetTickCount();
   uint8_t count = 0;
   while(1)
   {
     count++;
-    //å‰ä¸¤ä¸ªç¯è¡¨ç¤ºè¿æ¥çŠ¶ï¿½?
-    //1.åˆ¤æ–­å½“å‰è¿æ¥çŠ¶ï¿½?
+    //Ç°Á½¸öµÆ±íÊ¾Á¬½Ó×´Ì¬
+    //1.ÅĞ¶Ïµ±Ç°Á¬½Ó×´Ì¬
     if(remote_state == REMOTE_CONNECTED)
     {
-      //ç‚¹äº®å‰ä¸¤ä¸ªç¯
+      //µãÁÁÇ°Á½¸öµÆ
       Int_LED_turn_on(&left_top_led);
       Int_LED_turn_on(&right_top_led);
     }
     else
     {
-      //å…³é—­å‰ä¸¤ä¸ªç¯
+      //¹Ø±ÕÇ°Á½¸öµÆ
       Int_LED_turn_off(&left_top_led);
       Int_LED_turn_off(&right_top_led);
     }
 
-    //åä¸¤ä¸ªç¯è¡¨ç¤ºé£è¡ŒçŠ¶ï¿½?
-    //2.åˆ¤æ–­å½“å‰é£è¡ŒçŠ¶ï¿½?
+    //ºóÁ½¸öµÆ±íÊ¾·ÉĞĞ×´Ì¬
+    //2.ÅĞ¶Ïµ±Ç°·ÉĞĞ×´Ì¬
     if(flight_state == IDLE)
     {
-      //ç¯æ…¢é—ªçƒ => 500msï¿½? 500msï¿½?
+      //µÆÂıÉÁË¸ => 500msÁÁ 500msÃğ
       if(count%5==0)
       {
         Int_LED_toggle(&left_bottom_led);
@@ -169,7 +171,7 @@ void led_task(void *args)
     }
     else if(flight_state == NORMAL)
     {
-      //ç¯æ…¢é—ªçƒ => 200msï¿½? 200msï¿½?
+      //µÆÂıÉÁË¸ => 200msÁÁ 200msÃğ
       if(count%2==0)
       {
         Int_LED_toggle(&left_bottom_led);
@@ -178,20 +180,20 @@ void led_task(void *args)
     }
     else if(flight_state == FIX_HEIGHT)
     {
-      //åä¸¤ä¸ªç¯ï¿½?
+      //ºóÁ½¸öµÆÁÁ
       Int_LED_turn_on(&left_bottom_led);
       Int_LED_turn_on(&right_bottom_led);
     }
     else if(flight_state == FAIL)
     {
-      //åä¸¤ä¸ªç¯ï¿½?
+      //ºóÁ½¸öµÆÃğ
       Int_LED_turn_off(&left_bottom_led);
       Int_LED_turn_off(&right_bottom_led);
     }    
-    //ï¿½?100msæ‰§è¡Œä¸€ï¿½?
+    //Ã¿100msÖ´ĞĞÒ»´Î
     vTaskDelayUntil(&xLastWakeTime, LED_TASK_PERIOD);
     
-    //å°†counté‡ç½®
+    //½«countÖØÖÃ
     if(count == 10 )
     {
       count = 0;
@@ -200,25 +202,25 @@ void led_task(void *args)
 }
 
 /**
- * @brief  é€šè®¯ä»»åŠ¡
+ * @brief  Í¨Ñ¶ÈÎÎñ
  * 
  * 
  */
 uint8_t com_data[TX_PLOAD_WIDTH]={0};
 void com_task(void *args)
 {
-  //è·å–å½“å‰çš„åŸºå‡†æ—¶ï¿½?
+  //»ñÈ¡µ±Ç°µÄ»ù×¼Ê±¼ä
     TickType_t xLastWakeTime = xTaskGetTickCount();
 
     while (1)
     {
-        //æ¥æ”¶æ•°æ®åˆ°ç¼“å†²åŒº
+        //½ÓÊÕÊı¾İµ½»º³åÇø
         uint8_t res = Int_SI24R1_RxPacket(com_data);
         if(res==0)
         {
           debug_printf("RX OK:%s\n", com_data);
         }
-        //6msæ‰§è¡Œä¸€ï¿½? æ¥æ”¶æ•°æ®çš„æ—¶é—´é—´éš”åº”è¯¥ç­‰äºå‘é€æ•°æ®çš„æ—¶é—´é—´éš”
+        //6msÖ´ĞĞÒ»´Î ½ÓÊÕÊı¾İµÄÊ±¼ä¼ä¸ôÓ¦¸ÃµÈÓÚ·¢ËÍÊı¾İµÄÊ±¼ä¼ä¸ô
         vTaskDelayUntil(&xLastWakeTime, COM_TASK_PERIOD);
     }
 }
