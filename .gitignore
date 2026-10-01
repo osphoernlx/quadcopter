@@ -8,8 +8,10 @@
 *~
 
 # VS Code
-.vscode/extensions/
-.vscode/*.log
+**/.vscode/extensions/
+**/.vscode/*.log
+**/.vscode/*.log.lock
+**/.vscode/c_cpp_properties.json
 **/.vscode/settings.json
 
 # 编译产物
@@ -26,3 +28,13 @@ Release/
 *.axf
 *.uvguix.*
 *.uvoptx
+
+# Keil MDK 编译产物
+*.crf
+*.lnp
+*.dep
+*.htm
+*.build_log.htm
+
+# STM32CubeMX 状态文件
+.mxproject
