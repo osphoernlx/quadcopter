@@ -7,6 +7,7 @@
 #include "Int_IP5305T.h"
 #include "Int_SI24R1.h"
 #include "Int_key.h"
+#include "Int_joystick.h"
 
 /**
  * @brief  ??freeRTOS????
