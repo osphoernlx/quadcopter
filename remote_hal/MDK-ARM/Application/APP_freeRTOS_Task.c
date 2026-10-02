@@ -2,8 +2,6 @@
 
 //STM32F109C8T6 => SRAM 20K =>分配12K给操作系统
 
-//摇杆数据结构体
-Joystick_Struct joystick={0,0,0,0};
 
 
 //电源管理任务
@@ -130,11 +128,8 @@ void key_task(void *args)
     TickType_t xLastWakeTime = xTaskGetTickCount();
     while(1)
     {
-        KEY_type key = Int_key_get();
-        if(key!=KEY_NONE)
-        {
-            debug_printf("key=%d\n",key);
-        }
+        //统一的处理方式
+        App_process_key_data();
         //每20ms执行一次
         vTaskDelayUntil(&xLastWakeTime, KEY_TASK_PERIOD);
     }
@@ -153,10 +148,8 @@ void joy_task(void *args)
     Int_joystick_init();
     while(1)
     {
-        //获取摇杆监控的ADC值
-        Int_joystick_get(&joystick);
-
-        debug_printf(":%d,%d,%d,%d\n",joystick.thr,joystick.yaw,joystick.pit,joystick.rol);
+        //统一的处理方式
+        App_process_joystick_data();
         //每20ms执行一次
         vTaskDelayUntil(&xLastWakeTime, JOY_TASK_PERIOD);
     }

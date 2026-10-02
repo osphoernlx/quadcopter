@@ -6,11 +6,10 @@
 #include "Com_debug.h"
 #include "Int_IP5305T.h"
 #include "Int_SI24R1.h"
-#include "Int_key.h"
-#include "Int_joystick.h"
+#include "App_process_data.h"
 
 /**
- * @brief  ??freeRTOS????
+ * @brief  初始化freeRTOS任务
  * @param  None
  * @retval None
  */
