@@ -97,20 +97,8 @@ void com_task(void *args)
     TickType_t xLastWakeTime = xTaskGetTickCount();
     while(1)
     {
-        //调用SI24R1的接口 发送数据
-        //1.进入TX模式
-        Int_SI24R1_TX_Mode();
-        //2.发送数据
-        com_buff[0]='h';
-        com_buff[1]='e';
-        com_buff[2]='l';
-        com_buff[3]='l';
-        com_buff[4]='o';
-        com_buff[5]='!';
-        Int_SI24R1_TxPacket(com_buff);
-
-        //恢复到RX模式
-        Int_SI24R1_RX_Mode();
+        //将遥控数据打包发送到飞机
+        App_transmit_data();
 
         //每6ms执行一次 
         vTaskDelayUntil(&xLastWakeTime, COM_TASK_PERIOD);

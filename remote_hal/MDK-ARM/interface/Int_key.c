@@ -100,10 +100,10 @@ KEY_type Int_key_get(void)
         TickType_t count1=xTaskGetTickCount();
         //1.电弧抖动 消抖
         vTaskDelay(5);
-        if(HAL_GPIO_ReadPin(KEY_LEFT_X_GPIO_Port,KEY_LEFT_X_Pin) == GPIO_PIN_RESET)
+        if(HAL_GPIO_ReadPin(KEY_RIGHT_X_GPIO_Port,KEY_RIGHT_X_Pin) == GPIO_PIN_RESET)
         {
             //被人按下 不是电弧抖动
-            while(HAL_GPIO_ReadPin(KEY_LEFT_X_GPIO_Port,KEY_LEFT_X_Pin) == GPIO_PIN_RESET)
+            while(HAL_GPIO_ReadPin(KEY_RIGHT_X_GPIO_Port,KEY_RIGHT_X_Pin) == GPIO_PIN_RESET)
             {
                 //1ms的时间 cpu是释放的
                 vTaskDelay(1);
