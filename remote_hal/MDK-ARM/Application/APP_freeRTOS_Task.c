@@ -89,8 +89,6 @@ void power_task(void *args)
  * @retval None
  */
 
-uint8_t com_buff[TX_PLOAD_WIDTH]={0};
-
 void com_task(void *args)
 {
     //获取当前的基准时间 

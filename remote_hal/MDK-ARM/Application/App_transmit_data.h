@@ -3,6 +3,13 @@
 
 #include "Int_SI24R1.h"
 #include "App_process_data.h"
+#include "FreeRTOS.h"
+#include "task.h"
+
+//定义帧头校验的值
+#define FRAME_HEAD_CHECK_1 'E'
+#define FRAME_HEAD_CHECK_2 'M'
+#define FRAME_HEAD_CHECK_3 'T'
 
 
 /**

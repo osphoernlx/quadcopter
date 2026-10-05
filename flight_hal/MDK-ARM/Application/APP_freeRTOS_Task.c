@@ -206,7 +206,7 @@ void led_task(void *args)
  * 
  * 
  */
-uint8_t com_data[TX_PLOAD_WIDTH]={0};
+uint8_t com_data[TX_PLOAD_WIDTH+1]={0};
 void com_task(void *args)
 {
   //获取当前的基准时间

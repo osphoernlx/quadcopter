@@ -15,7 +15,7 @@ KEY_type Int_key_get(void)
         if(HAL_GPIO_ReadPin(KEY_UP_GPIO_Port,KEY_UP_Pin) == GPIO_PIN_RESET)
         {
         //2.人按下的时间通常比较长 => 为了不被多次判断 => 等待抬起按键才返回
-            while(HAL_GPIO_ReadPin(KEY_LEFT_X_GPIO_Port,KEY_LEFT_X_Pin) == GPIO_PIN_RESET)
+            while(HAL_GPIO_ReadPin(KEY_UP_GPIO_Port,KEY_UP_Pin) == GPIO_PIN_RESET)
             {
                 //1ms的时间 cpu是释放的
                 vTaskDelay(1);
